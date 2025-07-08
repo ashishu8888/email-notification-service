@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .header {
+            background-color: #1976d2;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .task-info {
+            margin: 20px;
+        }
+        .subtasks {
+            width: 80%;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+        }
+        .subtasks th, .subtasks td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .subtasks th {
+            background-color: #f2f2f2;
+        }
+        .completed {
+            color: green;
+            font-weight: bold;
+        }
+        .incomplete {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h2>🔔 Task Reminder</h2>
+</div>
+
+<div class="task-info">
+    <p>Hello <strong th:text="${firstName} + ' ' + ${lastName}">User</strong>,</p>
+    <p>This is a reminder for your task due on <strong th:text="${dueDate}">today</strong>:</p>
+
+    <h3 th:text="${taskTitle}">Task Title</h3>
+    <p th:text="${taskBody}">Task Body</p>
+
+    <h4>Subtasks:</h4>
+    <table class="subtasks">
+        <thead>
+        <tr>
+            <th>Subtask Title</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subtask : ${subtasks}">
+            <td th:text="${subtask.title}">Subtask</td>
+            <td th:class="${subtask.completed} ? 'completed' : 'incomplete'"
+                th:text="${subtask.completed} ? 'Completed' : 'Pending'">
+                Status
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>🕑 Please complete your task on time.</p>
+</div>
+</body>
+</html>
